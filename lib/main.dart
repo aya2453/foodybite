@@ -5,26 +5,6 @@ void main() {
   runApp(MyApp());
 }
 
-class Login extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: Column(
-        children: [
-          Text(
-            'Foodybite',
-            style: GoogleFonts.josefinSans(
-                textStyle: TextStyle(color: Colors.white),
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          )
-        ],
-      ),
-    );
-  }
-}
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -63,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/login_bg.png"),
+                      image: AssetImage("assets/login_bg.jpg"),
                       fit: BoxFit.cover)),
             ),
             Container(
