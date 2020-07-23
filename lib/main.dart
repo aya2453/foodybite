@@ -15,18 +15,15 @@ class Login extends StatelessWidget {
           Text(
             'Foodybite',
             style: GoogleFonts.josefinSans(
-              textStyle: TextStyle(color: Colors.white),
-              fontSize: 30,
-              fontWeight: FontWeight.bold
-            ),
-
+                textStyle: TextStyle(color: Colors.white),
+                fontSize: 30,
+                fontWeight: FontWeight.bold),
           )
         ],
       ),
     );
   }
 }
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -35,15 +32,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
@@ -65,87 +53,169 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          color: Colors.black,
-          padding: EdgeInsets.only(top: 100, bottom: 40, left: 20, right: 20),
-          // Center is a layout widget. It takes a single child and positions it
-          // in the middle of the parent.
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Foodybite',
-                  style: GoogleFonts.josefinSans(
-                      textStyle: TextStyle(color: Colors.white),
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold
+        body: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/login_bg.png"),
+                      fit: BoxFit.cover)),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0.0, 0.9, 1],
+                  colors: [Color.fromRGBO(45, 45, 45, 0.41), Color.fromRGBO(8, 8, 8, 1), Colors.black]
+                )
+              ),
+              padding: EdgeInsets.fromLTRB(32, 100, 32, 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Foodybite',
+                    style: GoogleFonts.josefinSans(
+                        textStyle: TextStyle(color: Colors.white),
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold),
                   ),
-
-                ),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'Forgot Password?',
-                        style: GoogleFonts.josefinSans(
-                            textStyle: TextStyle(color: Colors.white),
-                            fontSize: 20,
-                        ),
+                  Column(
+                    children: [
+                      LoginForm(),
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    SizedBox(height: 40),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 60,
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)
-                        ),
-                        onPressed: () => {},
-                        color: Colors.deepPurpleAccent,
+                      Align(
+                        alignment: Alignment.centerRight,
                         child: Text(
-                          'Login',
+                          'Forgot Password?',
                           style: GoogleFonts.josefinSans(
-                              textStyle: TextStyle(color: Colors.white),
-                              fontSize: 20,
+                            textStyle: TextStyle(color: Colors.white),
+                            fontSize: 18,
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 40),
-                    Text(
-                      'Create New Account',
-                      style: GoogleFonts.josefinSans(
-                          textStyle: TextStyle(color: Colors.white),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w300
+                      SizedBox(height: 40),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 60,
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          onPressed: () => {},
+                          color: Colors.deepPurpleAccent,
+                          child: Text(
+                            'Login',
+                            style: GoogleFonts.josefinSans(
+                              textStyle: TextStyle(color: Colors.white),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
                       ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
+                      SizedBox(height: 40),
+                      Text(
+                        'Create New Account',
+                        style: GoogleFonts.josefinSans(
+                            textStyle: TextStyle(color: Colors.white),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class LoginForm extends StatefulWidget {
+  LoginForm({Key key}) : super(key: key);
+
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            style: GoogleFonts.josefinSans(
+                textStyle: TextStyle(color: Colors.white), fontSize: 18),
+            decoration: InputDecoration(
+                fillColor: Colors.white24,
+                filled: true,
+                hintText: 'Email',
+                hintStyle: TextStyle(
+                  color: Colors.white,
+                ),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    'assets/icons/email.png',
+                    width: 18,
+                    height: 18,
+                  ),
+                ),
+                prefixStyle: TextStyle(color: Colors.white),
+                contentPadding: EdgeInsets.all(20),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15))),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          SizedBox(height: 20),
+          TextFormField(
+            style: GoogleFonts.josefinSans(
+                textStyle: TextStyle(color: Colors.white), fontSize: 18),
+            decoration: InputDecoration(
+                fillColor: Colors.white24,
+                filled: true,
+                hintText: 'Password',
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    'assets/icons/password.png',
+                    width: 18,
+                    height: 18,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                hintStyle: TextStyle(
+                  color: Colors.white,
+                ),
+                contentPadding: EdgeInsets.all(20),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15))),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          )
+        ],
       ),
     );
   }
